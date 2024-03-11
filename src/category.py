@@ -18,3 +18,6 @@ class Category:
 
     def __del__(self):
         Category.category_count -= 1
+
+    def __repr__(self):
+        return f"Category(name='{self.name}', description='{self.description}', products={self.products})"
