@@ -5,8 +5,9 @@ from category import Category
 from product import Product
 
 
-def load_categories(filepath=os.path.join('data', 'products.json')):
-    with open(filepath) as file:
+def load_categories(filepath=os.path.join('..', 'data', 'products.json')):
+    full_path = os.path.abspath(filepath)
+    with open(full_path, 'r', encoding='UTF-8') as file:
         json_list = load(file)
         categories = []
         for entity in json_list:

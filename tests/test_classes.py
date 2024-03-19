@@ -20,6 +20,11 @@ def iphone_15():
 
 
 @pytest.fixture
+def iphone_15_duplicate():
+    return Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+
+
+@pytest.fixture
 def smartphones(samsung_galaxy, iphone_15):
     return [samsung_galaxy, iphone_15]
 
@@ -51,3 +56,14 @@ def test_product(iphone_15):
     assert iphone_15.description == "512GB, Gray space"
     assert iphone_15.price == 210000.0
     assert iphone_15.count == 8
+
+
+def test_add_product(smartphones_category, iphone_15_duplicate):
+    category_len = len(smartphones_category.products)
+    smartphones_category.add_product(iphone_15_duplicate)
+    assert len(smartphones_category.products) == category_len
+
+
+def test_set_zero_price(iphone_15):
+    iphone_15.price = 0
+    assert iphone_15.price != 0
