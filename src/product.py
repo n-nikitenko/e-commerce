@@ -22,6 +22,9 @@ class Product:
         Результат - стоимость количества одного и второго товара'''
         return self.price * self.count + other.price * other.count
 
+    def __len__(self):
+        return self.count
+
     @classmethod
     def create_product(cls, name, description, price, count, category):
         """Проверяет наличие схожего товара в категории и возвращает созданный товар"""
