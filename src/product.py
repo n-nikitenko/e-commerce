@@ -14,6 +14,14 @@ class Product:
     def __repr__(self):
         return f"Product(name='{self.name}', description='{self.description}', price={self.price}, count={self.count})"
 
+    def __str__(self):
+        return f"{self.name}, {self.price}руб. Остаток: {self.count} шт."
+
+    def __add__(self, other):
+        '''Сложение двух товаров.
+        Результат - стоимость количества одного и второго товара'''
+        return self.price * self.count + other.price * other.count
+
     @classmethod
     def create_product(cls, name, description, price, count, category):
         """Проверяет наличие схожего товара в категории и возвращает созданный товар"""
