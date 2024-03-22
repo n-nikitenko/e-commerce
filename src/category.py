@@ -28,10 +28,7 @@ class Category:
         return f"{self.name}, количество продуктов: {len(self)} шт."
 
     def __len__(self):
-        ret = 0
-        for p in self.__products:
-            ret += p.count
-        return ret
+        return sum([len(p) for p in self.__products])
 
     def add_product(self, product):
         '''Добавляет товар в список товаров категории
