@@ -24,6 +24,15 @@ class Category:
     def __repr__(self):
         return f"Category(name='{self.name}', description='{self.description}', products={self.__products})"
 
+    def __str__(self):
+        return f"{self.name}, количество продуктов: {len(self)} шт."
+
+    def __len__(self):
+        ret = 0
+        for p in self.__products:
+            ret += p.count
+        return ret
+
     def add_product(self, product):
         '''Добавляет товар в список товаров категории
         Если в списке товаров уже есть такой товар, суммируется количество и устанавливается максимальная цена'''
@@ -37,5 +46,5 @@ class Category:
     @property
     def products(self):
         for product in self.__products:
-            print(f"{product.name}, {product.price} руб. Остаток: {product.count} шт.")
+            print(product)
         return self.__products

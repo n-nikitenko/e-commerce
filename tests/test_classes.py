@@ -1,5 +1,6 @@
 import pytest
 
+from src.product_interator import ProductIterator
 from src.category import Category
 from src.product import Product
 
@@ -67,3 +68,20 @@ def test_add_product(smartphones_category, iphone_15_duplicate):
 def test_set_zero_price(iphone_15):
     iphone_15.price = 0
     assert iphone_15.price != 0
+
+
+def test_products_sum(iphone_15, samsung_galaxy):
+    assert iphone_15 + samsung_galaxy == iphone_15.price * iphone_15.count + samsung_galaxy.price * samsung_galaxy.count
+
+
+def test_product_iterator(smartphones_category):
+    products = ProductIterator(smartphones_category)
+    is_empty = False
+    while not is_empty:
+        try:
+            p = next(products)
+            assert isinstance(p, Product)
+        except StopIteration:
+            is_empty = True
+            assert True
+    assert len(list(ProductIterator(smartphones_category))) == len(smartphones_category.products)
