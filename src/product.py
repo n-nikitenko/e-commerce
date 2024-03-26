@@ -4,12 +4,14 @@ class Product:
     description: str
     __price: float
     count: int
+    color: str
 
-    def __init__(self, name, description, price, count):
+    def __init__(self, name, description, price, count, color=None):
         self.name = name
         self.description = description
         self.__price = price
         self.count = count
+        self.color = color
 
     def __repr__(self):
         return f"Product(name='{self.name}', description='{self.description}', price={self.price}, count={self.count})"
@@ -20,6 +22,8 @@ class Product:
     def __add__(self, other):
         '''Сложение двух товаров.
         Результат - стоимость количества одного и второго товара'''
+        if type(self) != type(other):
+            raise TypeError(f'Сложение товаров разных типов невозможно')
         return self.price * self.count + other.price * other.count
 
     def __len__(self):
