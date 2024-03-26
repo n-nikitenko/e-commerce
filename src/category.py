@@ -1,15 +1,17 @@
 import copy
 
+from src.product import Product
+
 
 class Category:
     """Категория товаров"""
     name: str
     description: str
-    __products: list
+    __products: list[Product]
     category_count: int = 0
     uniq_products_count: int
 
-    def __init__(self, name, description, products):
+    def __init__(self, name: str, description: str, products: list[Product]):
         self.name = name
         self.description = description
         self.__products = []
@@ -33,6 +35,8 @@ class Category:
     def add_product(self, product):
         '''Добавляет товар в список товаров категории
         Если в списке товаров уже есть такой товар, суммируется количество и устанавливается максимальная цена'''
+        if not isinstance(product, Product):
+            raise ValueError('Недопустимое значение')
         duplicates = [p for p in self.__products if p.name.lower() == product.name.lower()]
         for p in duplicates:
             product.count += p.count
