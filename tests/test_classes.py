@@ -86,14 +86,11 @@ def test_add_product(smartphones_category, iphone_15_duplicate):
 def test_add_not_product(smartphones_category, iphone_15_duplicate, not_product, grass):
     """При добавлении в категорию продукта, который не является экземпляром класса Product или его наследников
     должно возникнуть исключение ValueError"""
-    try:
-        len_category = len(smartphones_category)
-        smartphones_category.add_product(grass)
-        assert len_category + len(grass) == len(smartphones_category)
+    len_category = len(smartphones_category)
+    smartphones_category.add_product(grass)
+    assert len_category + len(grass) == len(smartphones_category)
+    with pytest.raises(ValueError):
         smartphones_category.add_product(not_product)
-        assert False
-    except ValueError:
-        assert True
 
 
 def test_set_zero_price(iphone_15):
@@ -103,11 +100,8 @@ def test_set_zero_price(iphone_15):
 
 def test_products_sum(iphone_15, samsung_galaxy, grass):
     assert iphone_15 + samsung_galaxy == iphone_15.price * iphone_15.count + samsung_galaxy.price * samsung_galaxy.count
-    try:
+    with pytest.raises(TypeError):
         samsung_galaxy + grass  # должно возникнуть исключение TypeError
-        assert False
-    except TypeError:
-        assert True
 
 
 def test_product_iterator(smartphones_category):
